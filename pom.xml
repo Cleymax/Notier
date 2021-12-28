@@ -13,7 +13,7 @@
     <artifactId>notier</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Notier</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Backend for Notier App</description>
 
     <properties>
         <java.version>11</java.version>
