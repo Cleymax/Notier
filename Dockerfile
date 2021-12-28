@@ -19,9 +19,9 @@ USER spring:spring
 ARG EXTRACTED=/usr/src/myapp/target/extracted
 WORKDIR application
 
-COPY --from=build ${EXTRACTED}/dependencies/ ./
-COPY --from=build ${EXTRACTED}/spring-boot-loader/ ./
-COPY --from=build ${EXTRACTED}/snapshot-dependencies/ ./
-COPY --from=build ${EXTRACTED}/application/ ./
+COPY --from=builder ${EXTRACTED}/dependencies/ ./
+COPY --from=builder ${EXTRACTED}/spring-boot-loader/ ./
+COPY --from=builder ${EXTRACTED}/snapshot-dependencies/ ./
+COPY --from=builder ${EXTRACTED}/application/ ./
 
 ENTRYPOINT ["java","-noverify","-XX:TieredStopAtLevel=1","-Dspring.main.lazy-initialization=true","org.springframework.boot.loader.JarLauncher"]
