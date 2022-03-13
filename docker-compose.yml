@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:12.4-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: Pa$$word
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  api:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+networks:
+  bookier:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.200.0/24
