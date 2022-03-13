@@ -49,7 +49,7 @@ public class NoteController {
 
     @PutMapping("/{id}")
     public Note updateNote(@PathVariable Long id, @Valid @RequestBody Note newNote) {
-        var note = this.noteService.getNoteRepository().findById(id).orElseThrow(() -> new NoteNotFoundException(id));
+        var note = this.noteService.getNote(id).orElseThrow(() -> new NoteNotFoundException(id));
 
         if (newNote.getTitle() != null) note.setTitle(newNote.getTitle());
         if (newNote.getContent() != null) note.setContent(newNote.getContent());
@@ -66,7 +66,7 @@ public class NoteController {
     @PostMapping("/{id}/tags")
     public Note addTagOffNote(@PathVariable Long id, @Valid @RequestBody Tag tag) {
         var note = this.noteService.getNote(id).orElseThrow(() -> new NoteNotFoundException(id));
-        this.noteService.getTagRepository().save(tag);
+        this.noteService.saveTag(tag);
         note.getTags().add(tag);
 
         return this.noteService.saveNote(note);

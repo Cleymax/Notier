@@ -48,4 +48,8 @@ public class NoteService {
     public void deleteNote(final Long id) {
         this.noteRepository.deleteById(id);
     }
+
+    public Tag saveTag(Tag tag) {
+        return this.tagRepository.save(tag);
+    }
 }
